@@ -34,16 +34,16 @@ sudo: false
 
 matrix:
   include:
-    - env: EMACS=emacs24
-      addons:
-        apt:
-           packages:
-             - emacs24
     - env: EMACS=emacs23
       addons:
         apt:
            packages:
-             - emacs23
+           - emacs23
+    - env: EMACS=emacs24
+      addons:
+        apt:
+           packages:
+           - emacs24
 
 #env:
 #  - EMACS=emacs23
