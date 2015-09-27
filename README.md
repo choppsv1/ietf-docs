@@ -6,7 +6,7 @@
 This package adds an interactive function `ietf-docs-open-at-point`
 which can be bound to a key. When the function is invoked it will look
 at the text around the point and if it is an ietf document name (e.g.,
-RFC-12, RFC 831, draft-ietf-isis-ipv6, ...) it will then fetch the
+RFC-791, RFC 2992, draft-ietf-isis-ipv6, ...) it will then fetch the
 file (if it has not done so already), and load it into a new buffer.
 
 A useful binding might be `C-c i o`:
