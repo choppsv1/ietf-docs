@@ -17,7 +17,7 @@
 ###
 
 # travis-lint no longer permits this value
-# language: emacs-lisp
+language: emacs-lisp
 
 ###
 ### defining the build matrix
@@ -34,7 +34,7 @@ env:
   matrix:
     - EMACS=emacs23
     - EMACS=emacs24
-    - EMACS=emacs-snapshot
+    # - EMACS=emacs-snapshot
 
 # matrix:
 #   allow_failures:
@@ -42,6 +42,12 @@ env:
 
 before_install:
   - git submodule --quiet update --init --recursive
+
+addons:
+  apt:
+    packages:
+      - emacs23-nox
+      - emacs24-nox
 
 install:
 # GUI capable version
@@ -51,24 +57,24 @@ install:
 #        sudo apt-get -qq install emacs23-gtk emacs23-el;
 #    fi
 # Simply update built-in version
-  - if [ "$EMACS" = 'emacs23' ]; then
-        sudo apt-get -qq update &&
-        sudo apt-get -qq -f install &&
-        sudo apt-get -qq install emacs23-el;
-    fi
-  - if [ "$EMACS" = 'emacs24' ]; then
-        sudo add-apt-repository -y ppa:cassou/emacs &&
-        sudo apt-get -qq update &&
-        sudo apt-get -qq -f install &&
-        sudo apt-get -qq install emacs24 emacs24-el;
-    fi
-  - if [ "$EMACS" = 'emacs-snapshot' ]; then
-        sudo add-apt-repository -y ppa:ubuntu-elisp/ppa &&
-        sudo apt-get -qq update &&
-        sudo apt-get -qq -f install &&
-        sudo apt-get -qq install emacs-snapshot &&
-        sudo apt-get -qq install emacs-snapshot-el;
-    fi
+  # - if [ "$EMACS" = 'emacs23' ]; then
+  #       sudo apt-get -qq update &&
+  #       sudo apt-get -qq -f install &&
+  #       sudo apt-get -qq install emacs23-el;
+  #   fi
+  # - if [ "$EMACS" = 'emacs24' ]; then
+  #       sudo add-apt-repository -y ppa:cassou/emacs &&
+  #       sudo apt-get -qq update &&
+  #       sudo apt-get -qq -f install &&
+  #       sudo apt-get -qq install emacs24 emacs24-el;
+  #   fi
+  # - if [ "$EMACS" = 'emacs-snapshot' ]; then
+  #       sudo add-apt-repository -y ppa:ubuntu-elisp/ppa &&
+  #       sudo apt-get -qq update &&
+  #       sudo apt-get -qq -f install &&
+  #       sudo apt-get -qq install emacs-snapshot &&
+  #       sudo apt-get -qq install emacs-snapshot-el;
+  #   fi
 
 before_script:
   - if [ "$EMACS" = 'emacs-snapshot' ]; then
