@@ -1,9 +1,14 @@
-;;
-;; March 21 2015, Christian Hopps <chopps@gmail.com>
-;;
+;;; ietf-docs.el --- Fetch, Cache and Load IETF documents
+
 ;; Copyright (c) 2015 by Christian E. Hopps
 ;; All rights reserved.
-;;
+
+;; Author: Christian E. Hopps <chopps@gmail.com>
+;; Version: 1.0
+;; Package-Requires: ((thingatpt))
+;; Keywords: ietf, rfc
+;; URL: https://github.com/choppsv1/ietf-docs
+
 ;;; Commentary:
 ;;
 ;; Functions supporting fetching, caching and opening the IETF
@@ -17,7 +22,8 @@
 (require 'thingatpt)
 
 (defgroup  ietf-docs nil
-   "Customizable variables for ietf-docs functions")
+  "Customizable variables for ietf-docs functions"
+  :group 'communications)
 
 (defcustom ietf-docs-cache-directory (expand-file-name "~/ietf-docs-cache")
   "Local directory to store downloaded IETF documents. Created if necessary."
@@ -53,8 +59,8 @@
 (defun thing-at-point-bounds-of-ietf-name-at-point ()
   (if (thing-at-point-looking-at ietf-draft-or-rfc-regexp)
       (let ((beginning (match-beginning 0))
-            (end (match-end 0))))
-    (cons beginning end)))
+            (end (match-end 0)))
+        (cons beginning end))))
 
 (put 'ietf-docs-name 'thing-at-point 'thing-at-point-ietf-name-at-point)
 (defun thing-at-point-ietf-name-at-point ()
@@ -114,10 +120,12 @@
       pathname)
     pathname))
 
+;;;###autoload
 (defun ietf-docs-at-point-fetch-to-cache (&optional reload)
   (interactive "P")
   (ietf-docs-fetch-to-cache (ietf-docs-at-point) reload))
 
+;;;###autoload
 (defun ietf-docs-open-at-point (&optional reload)
   "Open the IETF internet-draft or RFC indicated by the point. Reload
   the cache if C-u prefix is specified"

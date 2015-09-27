@@ -1,3 +1,4 @@
+# Adapted from: git@github.com:rolandwalker/emacs-travis.git
 EMACS=emacs
 
 EMACS_CLEAN=-Q
