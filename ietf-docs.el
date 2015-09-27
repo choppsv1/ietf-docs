@@ -97,8 +97,6 @@
 		       (goto-char (car bounds))
 		     (error "No IETF document name here"))))))
 
-(global-set-key (kbd "C-c i t") 'get-thing-at-pt)
-
 (defun ietf-docs-starts-with (string prefix)
   "Return t if STRING starts with prefix."
   (let* ((l (length prefix)))
