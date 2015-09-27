@@ -25,7 +25,7 @@
   "Customizable variables for ietf-docs functions"
   :group 'communications)
 
-(defcustom ietf-docs-cache-directory (expand-file-name "~/ietf-docs-cache")
+(defcustom ietf-docs-cache-directory (expand-file-name "~/ietf-docs-cache/")
   "Local directory to store downloaded IETF documents. Created if necessary."
   :type 'directory
   :group 'ietf-docs)
@@ -39,15 +39,6 @@
   "The base URL to fetch IETF RFCs from."
   :type 'string
   :group 'ietf-docs)
-
-;; RFC-3999
-;; RFC 1222
-;; rfc 1029  
-;; RFC5999 
-;; RFC 4999
-;; draft-ietf-isis-01.txt  
-;; draft-ietf-isis-03.xml  
-;; draft-ietf-isis-02
 
 ;--------------------------------------------------
 ; Define a thing-at-point for draft and RFC names.
@@ -99,10 +90,12 @@
 
 (defun ietf-docs-at-point ()
   (interactive)
-  (concat (file-name-sans-extension (thing-at-point 'ietf-docs-name)) ".txt"))
+  (let ((docname (thing-at-point 'ietf-docs-name)))
+    (if docname
+      (concat (file-name-sans-extension docname) ".txt"))))
 
 (defun ietf-docs-fetch-to-cache (filename &optional reload)
-  (let* ((pathname (concat ietf-docs-cache-directory (downcase filename)))
+  (let* ((pathname (concat (file-name-as-directory ietf-docs-cache-directory) (downcase filename)))
          url)
     (if (and (file-exists-p pathname) (not reload))
         (message "Cached path %s" pathname)
