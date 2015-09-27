@@ -2,7 +2,17 @@
 
 ;; Copyright (c) 2015 by Christian E. Hopps
 ;; All rights reserved.
-;;
+
+;; Author: Christian E. Hopps <chopps@gmail.com>
+;; Version: 1.0.0
+;; Package-Requires: ((thingatpt))
+;; Keywords: ietf, rfc
+;; URL: https://github.com/choppsv1/ietf-docs
+
+;; This file is NOT part of GNU Emacs.
+
+;;; License:
+
 ;; Licensed under the Apache License, Version 2.0 (the "License");
 ;; you may not use this file except in compliance with the License.
 ;; You may obtain a copy of the License at
@@ -14,12 +24,6 @@
 ;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
-
-;; Author: Christian E. Hopps <chopps@gmail.com>
-;; Version: 1.0
-;; Package-Requires: ((thingatpt))
-;; Keywords: ietf, rfc
-;; URL: https://github.com/choppsv1/ietf-docs
 
 ;;; Commentary:
 ;;
@@ -104,7 +108,7 @@
   (interactive)
   (let ((docname (thing-at-point 'ietf-docs-name)))
     (if docname
-      (concat (file-name-sans-extension docname) ".txt"))))
+        (concat (file-name-sans-extension docname) ".txt"))))
 
 (defun ietf-docs-fetch-to-cache (filename &optional reload)
   (let* ((pathname (concat (file-name-as-directory ietf-docs-cache-directory) (downcase filename)))
@@ -136,4 +140,5 @@
     (find-file pathname)))
 
 (provide 'ietf-docs)
+
 ;;; ietf-docs.el ends here
