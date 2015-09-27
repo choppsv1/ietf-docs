@@ -1,0 +1,95 @@
+###
+### Notes
+###
+### The travis web interface may choke silently and fail to
+### update when there are issues with the .travis.yml file.
+###
+### The "travis-lint" command-line tool does not catch all
+### errors which may lead to silent failure.
+###
+### Shell-style comments in this file must have "#" as the
+### *first* character of the line.
+###
+
+###
+### language
+###
+
+# travis-lint no longer permits this value
+# language: emacs-lisp
+
+###
+### defining the build matrix
+###
+### ===>                                                       <===
+### ===> each variation in env/matrix will be built and tested <===
+### ===>                                                       <===
+###
+### variables under env/global are available to the build process
+### but don't cause the creation of a separate variation
+###
+
+env:
+  matrix:
+    - EMACS=emacs23
+    - EMACS=emacs24
+    - EMACS=emacs-snapshot
+
+matrix:
+  allow_failures:
+    - env: EMACS=emacs-snapshot
+
+before_install:
+  - git submodule --quiet update --init --recursive
+
+install:
+# GUI capable version
+#  - if [ "$EMACS" = 'emacs23' ]; then
+#        sudo apt-get -qq update &&
+#        sudo apt-get -qq -f install &&
+#        sudo apt-get -qq install emacs23-gtk emacs23-el;
+#    fi
+# Simply update built-in version
+  - if [ "$EMACS" = 'emacs23' ]; then
+        sudo apt-get -qq update &&
+        sudo apt-get -qq -f install &&
+        sudo apt-get -qq install emacs23-el;
+    fi
+  - if [ "$EMACS" = 'emacs24' ]; then
+        sudo add-apt-repository -y ppa:cassou/emacs &&
+        sudo apt-get -qq update &&
+        sudo apt-get -qq -f install &&
+        sudo apt-get -qq install emacs24 emacs24-el;
+    fi
+  - if [ "$EMACS" = 'emacs-snapshot' ]; then
+        sudo add-apt-repository -y ppa:ubuntu-elisp/ppa &&
+        sudo apt-get -qq update &&
+        sudo apt-get -qq -f install &&
+        sudo apt-get -qq install emacs-snapshot &&
+        sudo apt-get -qq install emacs-snapshot-el;
+    fi
+
+before_script:
+  - if [ "$EMACS" = 'emacs-snapshot' ]; then
+        make downloads-latest;
+    else
+        make downloads;
+    fi
+
+script:
+  $EMACS --version && ( test "$EMACS" != 'emacs22' && make test EMACS="$EMACS" || make test-batch EMACS="$EMACS" )
+
+###
+### settings
+###
+
+#
+# Emacs
+#
+# Local Variables:
+# indent-tabs-mode: nil
+# coding: utf-8
+# End:
+
+notifications:
+  email: false
