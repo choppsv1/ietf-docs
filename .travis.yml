@@ -19,6 +19,7 @@
 # travis-lint no longer permits this value
 # language: emacs-lisp
 language: generic
+sudo: false
 
 ###
 ### defining the build matrix
@@ -31,11 +32,23 @@ language: generic
 ### but don't cause the creation of a separate variation
 ###
 
-env:
-  - EMACS=emacs23
-  - EMACS=emacs24
+matrix:
+  include:
+    - env: EMACS=emacs24
+      addons:
+        apt:
+           packages:
+             - emacs24
+    - env: EMACS=emacs23
+      addons:
+        apt:
+           packages:
+             - emacs23
 
-    # - EMACS=emacs-snapshot
+#env:
+#  - EMACS=emacs23
+#  - EMACS=emacs24
+#  - EMACS=emacs-snapshot
 
 # matrix:
 #   allow_failures:
@@ -44,15 +57,8 @@ env:
 before_install:
   - git submodule --quiet update --init --recursive
 
-addons:
-  apt:
-    packages:
-      - emacs24-nox
-
 install:
   - 'emacs --version'
-  - 'emacs23 --version'
-  - 'emacs24 --version'
   - '"$EMACS" --version'
 
 # GUI capable version
