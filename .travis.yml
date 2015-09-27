@@ -39,7 +39,7 @@ matrix:
       addons:
         apt:
            packages:
-           - emacs-24
+           - emacs24-nox
 
 #env:
 #  - EMACS=emacs23
