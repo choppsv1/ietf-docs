@@ -46,8 +46,8 @@ before_install:
 addons:
   apt:
     packages:
-      - emacs23-nox
-      - emacs24-nox
+      - emacs23
+      - emacs24
 
 install:
 # GUI capable version
