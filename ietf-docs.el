@@ -99,10 +99,7 @@
 
 (defun ietf-docs-at-point ()
   (interactive)
-  (concat (file-name-sans-extension (file-name-base (thing-at-point 'ietf-docs-name))) ".txt"))
-
-(defun ietf-docs-normalize-filename (filename)
-  (concat (file-name-sans-extension (downcase filename)) ".txt"))
+  (concat (file-name-sans-extension (thing-at-point 'ietf-docs-name)) ".txt"))
 
 (defun ietf-docs-fetch-to-cache (filename &optional reload)
   (let* ((pathname (concat ietf-docs-cache-directory (downcase filename)))
