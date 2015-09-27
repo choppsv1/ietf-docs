@@ -18,6 +18,7 @@
 
 # travis-lint no longer permits this value
 # language: emacs-lisp
+language: generic
 
 ###
 ### defining the build matrix
@@ -31,9 +32,9 @@
 ###
 
 env:
-  matrix:
-    - EMACS=emacs23
-    - EMACS=emacs24
+  - EMACS=emacs23
+  - EMACS=emacs24
+
     # - EMACS=emacs-snapshot
 
 # matrix:
@@ -50,6 +51,11 @@ addons:
       - emacs24
 
 install:
+  - 'emacs --version'
+  - 'emacs23 --version'
+  - 'emacs24 --version'
+  - '"$EMACS" --version'
+
 # GUI capable version
 #  - if [ "$EMACS" = 'emacs23' ]; then
 #        sudo apt-get -qq update &&
