@@ -23,7 +23,7 @@ build :
 	$(EMACS) $(EMACS_BATCH) --eval             \
 	    "(progn                                \
 	      (setq byte-compile-error-on-warn t)  \
-	      (batch-byte-compile))" *.el
+	      (batch-byte-compile))" ietf-docs.el
 
 test-dep-1 :
 	@cd $(TEST_DIR)                                      && \

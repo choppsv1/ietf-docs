@@ -18,6 +18,8 @@
 
 # travis-lint no longer permits this value
 # language: emacs-lisp
+language: generic
+# sudo: false
 
 ###
 ### defining the build matrix
@@ -30,11 +32,19 @@
 ### but don't cause the creation of a separate variation
 ###
 
+# matrix:
+#   include:
+#     - env: EMACS=emacs23
+#     - env: EMACS=emacs24
+#       addons:
+#         apt:
+#            packages:
+#            - emacs24-nox
+
 env:
-  matrix:
-    - EMACS=emacs23
-    - EMACS=emacs24
-    - EMACS=emacs-snapshot
+  - EMACS=emacs23
+  - EMACS=emacs24
+  - EMACS=emacs-snapshot
 
 matrix:
   allow_failures:
@@ -44,13 +54,6 @@ before_install:
   - git submodule --quiet update --init --recursive
 
 install:
-# GUI capable version
-#  - if [ "$EMACS" = 'emacs23' ]; then
-#        sudo apt-get -qq update &&
-#        sudo apt-get -qq -f install &&
-#        sudo apt-get -qq install emacs23-gtk emacs23-el;
-#    fi
-# Simply update built-in version
   - if [ "$EMACS" = 'emacs23' ]; then
         sudo apt-get -qq update &&
         sudo apt-get -qq -f install &&
@@ -69,6 +72,8 @@ install:
         sudo apt-get -qq install emacs-snapshot &&
         sudo apt-get -qq install emacs-snapshot-el;
     fi
+  - 'emacs --version'
+  - '"$EMACS" --version'
 
 before_script:
   - if [ "$EMACS" = 'emacs-snapshot' ]; then
@@ -84,6 +89,9 @@ script:
 ### settings
 ###
 
+notifications:
+  email: false
+
 #
 # Emacs
 #
@@ -91,6 +99,3 @@ script:
 # indent-tabs-mode: nil
 # coding: utf-8
 # End:
-
-notifications:
-  email: false
