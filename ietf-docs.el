@@ -138,7 +138,7 @@
   (interactive "P")
   (let ((pathname (ietf-docs-at-point-fetch-to-cache reload)))
     (if pathname
-        (find-file pathname)
+        (find-file-read-only pathname)
       (error "No IETF document name around point"))))
 
 (provide 'ietf-docs)
