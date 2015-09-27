@@ -32,9 +32,9 @@
 
 env:
   matrix:
-    # - EMACS=emacs23
+    - EMACS=emacs23
     - EMACS=emacs24
-    # - EMACS=emacs-snapshot
+    - EMACS=emacs-snapshot
 
 # matrix:
 #   allow_failures:
