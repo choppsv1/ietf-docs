@@ -4,7 +4,7 @@
 ;; All rights reserved.
 
 ;; Author: Christian E. Hopps <chopps@gmail.com>
-;; Version: 1.0.0
+;; Package-Version: 1.0.0
 ;; Keywords: ietf, rfc
 ;; URL: https://github.com/choppsv1/ietf-docs
 
@@ -97,12 +97,12 @@
 		     (error "No IETF document name here"))))))
 
 (defun ietf-docs-starts-with (string prefix)
-  "Return t if STRING starts with prefix."
+  "Return t if STRING starts with PREFIX."
   (let* ((l (length prefix)))
     (string= (substring string 0 l) prefix)))
 
 (defun ietf-docs-at-point ()
-  (interactive)
+  "Return the ietf document name at the point with .txt extension."
   (let ((docname (thing-at-point 'ietf-docs-name)))
     (if docname
         (concat (file-name-sans-extension docname) ".txt"))))
@@ -125,6 +125,8 @@
 
 ;;;###autoload
 (defun ietf-docs-at-point-fetch-to-cache (&optional reload)
+  "Load the document around the point into the cache if not
+  present. If prefix argument is given force cache RELOAD."
   (interactive "P")
   (let ((docname (ietf-docs-at-point)))
     (if docname
@@ -132,8 +134,8 @@
 
 ;;;###autoload
 (defun ietf-docs-open-at-point (&optional reload)
-  "Open the IETF internet-draft or RFC indicated by the point. Reload
-  the cache if C-u prefix is specified"
+  "Open the IETF internet-draft or RFC indicated by the point in a new
+  buffer. RELOAD the cache if PREFIX argument is specified"
   (interactive "P")
   (let ((pathname (ietf-docs-at-point-fetch-to-cache reload)))
     (if pathname
