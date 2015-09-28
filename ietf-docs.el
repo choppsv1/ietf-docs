@@ -5,7 +5,6 @@
 
 ;; Author: Christian E. Hopps <chopps@gmail.com>
 ;; Version: 1.0.0
-;; Package-Requires: ((thingatpt))
 ;; Keywords: ietf, rfc
 ;; URL: https://github.com/choppsv1/ietf-docs
 
