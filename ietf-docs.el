@@ -5,7 +5,6 @@
 
 ;; Author: Christian E. Hopps <chopps@gmail.com>
 ;; Version: 1.0.0
-;; Package-Requires: ((thingatpt))
 ;; Keywords: ietf, rfc
 ;; URL: https://github.com/choppsv1/ietf-docs
 
@@ -127,7 +126,9 @@
 ;;;###autoload
 (defun ietf-docs-at-point-fetch-to-cache (&optional reload)
   (interactive "P")
-  (ietf-docs-fetch-to-cache (ietf-docs-at-point) reload))
+  (let ((docname (ietf-docs-at-point)))
+    (if docname
+        (ietf-docs-fetch-to-cache docname) reload)))
 
 ;;;###autoload
 (defun ietf-docs-open-at-point (&optional reload)
@@ -135,7 +136,9 @@
   the cache if C-u prefix is specified"
   (interactive "P")
   (let ((pathname (ietf-docs-at-point-fetch-to-cache reload)))
-    (find-file pathname)))
+    (if pathname
+        (find-file-read-only pathname)
+      (error "No IETF document name around point"))))
 
 (provide 'ietf-docs)
 
