@@ -130,7 +130,7 @@
   (interactive "P")
   (let ((docname (ietf-docs-at-point)))
     (if docname
-        (ietf-docs-fetch-to-cache docname) reload)))
+        (ietf-docs-fetch-to-cache docname reload))))
 
 ;;;###autoload
 (defun ietf-docs-open-at-point (&optional reload)
