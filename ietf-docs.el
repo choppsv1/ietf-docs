@@ -45,12 +45,12 @@
   :type 'directory
   :group 'ietf-docs)
 
-(defcustom ietf-docs-draft-url-directory "http://tools.ietf.org/id/"
+(defcustom ietf-docs-draft-url-directory "http://ietf.org/id/"
   "The base URL to fetch IETF drafts from."
   :type 'string
   :group 'ietf-docs)
 
-(defcustom ietf-docs-rfc-url-directory "http://tools.ietf.org/rfc/"
+(defcustom ietf-docs-rfc-url-directory "http://ietf.org/rfc/"
   "The base URL to fetch IETF RFCs from."
   :type 'string
   :group 'ietf-docs)
